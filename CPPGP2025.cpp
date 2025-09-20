@@ -11,9 +11,9 @@ int main()
     cout << v1 << endl;
 
     ZVector3 v2(-1, 1, 1);
-    cout << v2.cross(v1) << endl;
+    cout << v2.Cross(v1) << endl;
 
-    cout << v1.dot(v2) << endl;
+    cout << v1.Dot(v2) << endl;
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
