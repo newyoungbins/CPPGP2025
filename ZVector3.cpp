@@ -9,7 +9,7 @@ double ZVector3::Dot(const ZVector3& u, const ZVector3& v)
 	return u.x * v.x + u.y * v.y + u.z * v.z;
 }
 
-ZVector3 ZVector3::Cross(const ZVector3& u, const ZVector3 v)
+ZVector3 ZVector3::Cross(const ZVector3& u, const ZVector3& v)
 {
 	double x = u.y * v.z - u.z * v.y;
 	double y = u.z * v.x - u.x * v.z;
@@ -31,7 +31,7 @@ ZVector3::~ZVector3() {}
 
 #pragma endregion
 
-#pragma region member Function
+#pragma region member Functions
 
 double ZVector3::Dot(const ZVector3& rhs) const
 {
@@ -64,6 +64,7 @@ double ZVector3::radBetween(const ZVector3& a, const ZVector3& b) const
 	// floating point 오차 보정 ([-1, 1] 범위 밖 방지)
 	if (cosTheta > 1.0) cosTheta = 1.0;
 	if (cosTheta < -1.0) cosTheta = -1.0;
+
 	return std::acos(cosTheta);
 }
 
@@ -73,8 +74,8 @@ double ZVector3::degBetween(const ZVector3& a, const ZVector3& b) const {
 
 ZVector3 ZVector3::Normalize() const
 {
-	float len = Length();
-	if (len == 0.0f) return ZVector3(0, 0, 0);
+	double len = Length();
+	if (len == 0.0) return ZVector3(0, 0, 0);
 	return ZVector3(this->x / len, this->y / len, this->z / len);
 }
 
@@ -85,7 +86,7 @@ ZVector3 ZVector3::Cross(const ZVector3& rhs) const
 
 ZVector3 ZVector3::Transform(const ZMatrix& matrix) const
 {
-	// D3D 기준 (벡터 * 행렬) 이므로 동차좌표 w=1 계산
+	// D3D 기준 (벡터 * 행렬) 이므로 동차좌표 w=1로 계산
 	float newX = x * matrix.m[0][0] + y * matrix.m[1][0] + z * matrix.m[2][0] + 1.0 * matrix.m[3][0];
 	float newY = x * matrix.m[0][1] + y * matrix.m[1][1] + z * matrix.m[2][1] + 1.0 * matrix.m[3][1];
 	float newZ = x * matrix.m[0][2] + y * matrix.m[1][2] + z * matrix.m[2][2] + 1.0 * matrix.m[3][2];
@@ -122,3 +123,5 @@ ZVector3 ZVector3::operator*(double k) const
 {
 	return Scale(k);
 }
+
+#pragma endregion
