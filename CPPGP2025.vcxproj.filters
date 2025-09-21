@@ -24,12 +24,24 @@
     <ClCompile Include="ZMatrix.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZVector3.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="ZMatrix.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CPPGP2025.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
