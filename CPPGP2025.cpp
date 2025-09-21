@@ -5,7 +5,12 @@
 #include "GameState.h"
 #include "ZVector3.h"
 #include "ZMatrix.h"
+#include "TitleState.h"
 #include "CPPGP2025.h"
+
+#define WIN_NAME L"WinAPI State Pattern";
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
 
 GameState* g_currentState = nullptr;
 HWND g_hWnd;
@@ -17,9 +22,43 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        timeBeginPeriod(1);
+        break;
     case WM_DESTROY: // 창이 닫힐 때 발생
         PostQuitMessage(0); // 메세지 루프를 종료하도록 요청
         break;
+    case WM_KEYDOWN:
+        if (g_currentState)
+        {
+            g_currentState->OnKeyDown(wParam);
+        }
+        break;
+    case WM_KEYUP:
+        if (g_currentState)
+        {
+            g_currentState->OnkeyUp(wParam);
+        }
+        break;
+    case WM_LBUTTONDOWN:
+    case WM_RBUTTONDOWN:
+    case WM_MBUTTONDOWN:
+        if (g_currentState)
+        {
+            g_currentState->OnMouseDown(LOWORD(lParam), HIWORD(lParam), (int)wParam);
+        }
+    case WM_LBUTTONUP:
+    case WM_RBUTTONUP:
+    case WM_MBUTTONUP:
+        if (g_currentState)
+        {
+            g_currentState->OnMouseUp(LOWORD(lParam), HIWORD(lParam), (int)wParam);
+        }
+    case WM_MOUSEMOVE:
+        if (g_currentState)
+        {
+            g_currentState->OnMouseMove(LOWORD(lParam), HIWORD(lParam));
+        }
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
 
@@ -44,6 +83,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevlnstance, LPSTR lpCmdLine
     wc.lpfnWndProc = WndProc;
     wc.hInstance = hInstance;
     wc.lpszClassName = L"CPPGPClass";
+    
 
     //  윈도우 클래스 등록
     RegisterClass(&wc);
@@ -56,7 +96,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevlnstance, LPSTR lpCmdLine
         WS_OVERLAPPEDWINDOW,    // 윈도우 스타일
 
         // 크기 및 위치
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+        CW_USEDEFAULT, CW_USEDEFAULT, WIN_WIDTH, WIN_HEIGHT,
 
         NULL, // 부모 윈도우
         NULL, // 메뉴
@@ -74,11 +114,39 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevlnstance, LPSTR lpCmdLine
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
+    // 시작 상태
+    ChangeState(new TitleState());
+
+    long long prevTime = timeGetTime();
+
     MSG msg = {};
     while (GetMessage(&msg, NULL, 0, 0))
     {
+        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+        {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
+        }
+        else
+        {
+            long long currentTime = timeGetTime();
+            float elapsedTime = (currentTime - prevTime) / 1000.0f;
+            prevTime = currentTime;
+
+            if (g_currentState)
+            {
+                g_currentState->Update(elapsedTime);
+            }
+
+            InvalidateRect(g_hWnd, NULL, FALSE);
+        }
+    }
+
+    if (g_currentState)
+    {
+        g_currentState->Exit();
+        delete g_currentState;
+        g_currentState = nullptr;
     }
 
     FreeConsole();
