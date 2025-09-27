@@ -7,6 +7,7 @@
 #include "ZMatrix.h"
 #include "TitleState.h"
 #include "CPPGP2025.h"
+#include "Bitmap.h"
 
 #define WIN_NAME L"WinAPI State Pattern";
 #define WIN_WIDTH 800
@@ -14,6 +15,7 @@
 
 GameState* g_currentState = nullptr;
 HWND g_hWnd;
+BmpImage g_bmp;
 
 void MatrixTest();
 void ChangeState(GameState* newState);
@@ -24,7 +26,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         timeBeginPeriod(1);
+        if (!g_bmp.Load(L"Splash.bmp")) {
+            MessageBox(hWnd, L"BMP 파일 로드 실패!", L"Error", MB_ICONERROR);
+        }
         break;
+    case WM_PAINT:
+        {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        g_bmp.Draw(hdc, 10, 10);
+        EndPaint(hWnd, &ps);
+        break;
+        }
     case WM_DESTROY: // 창이 닫힐 때 발생
         PostQuitMessage(0); // 메세지 루프를 종료하도록 요청
         break;

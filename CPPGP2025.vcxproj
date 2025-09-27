@@ -124,13 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPPGP2025.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="ZMatrix.cpp" />
     <ClCompile Include="ZVector3.cpp" />
+    <ClCompile Include="MenuState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bitmap.h" />
     <ClInclude Include="CPPGP2025.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="ZMatrix.h" />
     <ClInclude Include="ZVector3.h" />
