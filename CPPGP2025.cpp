@@ -15,7 +15,6 @@
 
 GameState* g_currentState = nullptr;
 HWND g_hWnd;
-BmpImage g_bmp;
 
 void MatrixTest();
 void ChangeState(GameState* newState);
@@ -26,16 +25,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         timeBeginPeriod(1);
-        if (!g_bmp.Load(L"Splash.bmp")) {
-            MessageBox(hWnd, L"BMP 파일 로드 실패!", L"Error", MB_ICONERROR);
-        }
         break;
+
     case WM_PAINT:
+        {
+        if (g_currentState)
         {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        g_bmp.Draw(hdc, 10, 10);
+        g_currentState->Render(wParam);
         EndPaint(hWnd, &ps);
+        }
         break;
         }
     case WM_DESTROY: // 창이 닫힐 때 발생
