@@ -124,8 +124,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPPGP2025.cpp" />
+    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="ZApplication.cpp" />
+    <ClCompile Include="ZGraphics.cpp" />
     <ClCompile Include="ZMatrix.cpp" />
     <ClCompile Include="ZVector3.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -133,10 +136,17 @@
   <ItemGroup>
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="CPPGP2025.h" />
+    <ClInclude Include="GameGlobal.h" />
+    <ClInclude Include="GameMain.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="TitleState.h" />
+    <ClInclude Include="ZApplication.h" />
+    <ClInclude Include="ZD3D11.h" />
+    <ClInclude Include="ZFrameworkGlobal.h" />
+    <ClInclude Include="ZGraphics.h" />
+    <ClInclude Include="ZGraphicsGlobal.h" />
     <ClInclude Include="ZMatrix.h" />
     <ClInclude Include="ZVector3.h" />
   </ItemGroup>

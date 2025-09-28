@@ -33,7 +33,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        g_currentState->Render(wParam);
+        //g_currentState->Render(wParam);                   //----------------------------------------<<<< 이거 에러나요
         EndPaint(hWnd, &ps);
         }
         break;
