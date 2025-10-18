@@ -22,6 +22,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{8772f274-60c1-4564-8172-4c1f0fe3af58}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Binderable">
+      <UniqueIdentifier>{a89a7971-3933-457f-bf6d-6bd6ee74a0c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZVector3.cpp">
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="DxgiInfoManager.cpp">
       <Filter>Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="ZTopology.cpp">
+      <Filter>Binderable</Filter>
+    </ClCompile>
+    <ClCompile Include="ZInputLayout.cpp">
+      <Filter>Binderable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="WindowsThrowMacros.h">
       <Filter>Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="ZBindable.h">
+      <Filter>Binderable</Filter>
+    </ClInclude>
+    <ClInclude Include="ZTopology.h">
+      <Filter>Binderable</Filter>
+    </ClInclude>
+    <ClInclude Include="ZInputLayout.h">
+      <Filter>Binderable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
