@@ -10,7 +10,9 @@ private:
 public:
 	virtual LRESULT CALLBACK MsgProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lparam);
 
-	ZApp(const TCHAR* pszCaption, DWORD XPos = 0, DWORD YPos = 0, DWORD Width = 640, DWORD Height = 480);
+	ZApp(const TCHAR* pszCaption, DWORD XPos = 0, DWORD YPos = 0,
+			DWORD Width = 640, DWORD Height = 480, 
+			DWORD ClientWidth = 640, DWORD ClientHeight = 480);
 	~ZApp();
 
 	DWORD GetWidth();
