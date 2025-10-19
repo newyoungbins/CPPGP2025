@@ -8,14 +8,17 @@
 
 // Standard ANSI-C includes
 #include <time.h>
+#include <assert.h>
 #include <iostream>
 #include <sstream>
 #include <vector>
 #include <string>
 #include <memory>
+#include <random>
 
 // DirectX includes
 #include <d3d11.h>
+#include <DirectXMath.h>
 #include "dxerr.h"
 #include "ChiliException.h"
 

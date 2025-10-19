@@ -2,6 +2,7 @@
 #include "ChiliException.h"
 #include <wrl.h> // ComPtr
 #include "DxgiInfoManager.h"
+#include "ZConditionalNoExcept.h"
 
 // D3D 11의 초기화 및 핵심 인터페이스 관리
 
@@ -77,6 +78,10 @@ public:
 	// green (0.0f ~ 1.0f)
 	// blue (0.0f ~ 1.0f)
 	void ClearBuffer(float red, float green, float blue) noexcept;
+	void SetViewport() noexcept;
+	void RenderIndexed(UINT count) noxnd;
+	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
 
 	// Basic
 	void DrawTestTriangle();
