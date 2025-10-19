@@ -152,18 +152,18 @@ BOOL ZApp::Frame()
 
 
 	// 고정위치
-	m_pGraphics->DrawCubeDepth(
-		-(float)dValue,
-		0.0f,
-		0.0f
-	);
+	//m_pGraphics->DrawCubeDepth(
+	//	-(float)dValue,
+	//	0.0f,
+	//	0.0f
+	//);
 
 	// 마우스로 y축으로 깊이 조정
-	m_pGraphics->DrawCubeDepth(
-		(float)dValue,
-		((float)pt.x / ((float)m_ClientWidth / 2.0f)) - 1.0f,
-		(-(float)pt.y / ((float)m_ClientHeight / 2.0f)) + 1.0f
-	);
+	//m_pGraphics->DrawCubeDepth(
+	//	(float)dValue,
+	//	((float)pt.x / ((float)m_ClientWidth / 2.0f)) - 1.0f,
+	//	(-(float)pt.y / ((float)m_ClientHeight / 2.0f)) + 1.0f
+	//);
 
 
 	// 렌더링된 후면 버퍼를 화면에 표시합니다.
