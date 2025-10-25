@@ -5,26 +5,26 @@
 
 namespace Bind
 {
-	ZVertexShader::ZVertexShader(ZGraphics& gfx, const std::wstring& path)
-	{
-		INFOMAN(gfx);
+    ZVertexShader::ZVertexShader(ZGraphics& gfx, const std::wstring& path)
+    {
+        INFOMAN(gfx);
 
-		GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBytecodeBlob));
-		GFX_THROW_INFO(GetDevice(gfx)->CreateVertexShader(
-			pBytecodeBlob->GetBufferPointer(),
-			pBytecodeBlob->GetBufferSize(),
-			nullptr,
-			&pVertexShader
-		));
-	}
+        GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBytecodeBlob));
+        GFX_THROW_INFO(GetDevice(gfx)->CreateVertexShader(
+            pBytecodeBlob->GetBufferPointer(),
+            pBytecodeBlob->GetBufferSize(),
+            nullptr,
+            &pVertexShader
+        ));
+    }
 
-	void ZVertexShader::Bind(ZGraphics& gfx) noexcept
-	{
-		GetContext(gfx)->VSSetShader(pVertexShader.Get(), nullptr, 0u);
-	}
+    void ZVertexShader::Bind(ZGraphics& gfx) noexcept
+    {
+        GetContext(gfx)->VSSetShader(pVertexShader.Get(), nullptr, 0u);
+    }
 
-	ID3DBlob* ZVertexShader::GetByteCode() const noexcept
-	{
-		return pBytecodeBlob.Get();
-	}
+    ID3DBlob* ZVertexShader::GetBytecode() const noexcept
+    {
+        return pBytecodeBlob.Get();
+    }
 }

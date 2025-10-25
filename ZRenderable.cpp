@@ -21,7 +21,7 @@ void ZRenderable::Render(ZGraphics& gfx) const noxnd
 
 void ZRenderable::AddBind(std::unique_ptr<Bind::ZBindable> bind) noxnd
 {
-    assert("Must use AddIndexBuffer to bind index buffer" && typeid(*bind) != typeid(ZIndexBuffer));
+    assert("*Must* use AddIndexBuffer to bind index buffer" && typeid(*bind) != typeid(ZIndexBuffer));
     binds.push_back(std::move(bind));
 }
 

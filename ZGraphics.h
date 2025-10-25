@@ -3,6 +3,7 @@
 #include <wrl.h> // ComPtr
 #include "DxgiInfoManager.h"
 #include "ZConditionalNoExcept.h"
+#include "SampleBox.h"
 
 // D3D 11의 초기화 및 핵심 인터페이스 관리
 
@@ -11,14 +12,18 @@ class ZGraphics
 	friend class ZGraphicsResource;
 
 private:
-	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
-	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
+	DirectX::XMMATRIX projection;
+
+	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;			// D3D11 장치, 리소스 생성 및 관리
+	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;			// 스왑 체인, 후면 버퍼와 화면 출력을 교체
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;	// D3D11 장치 컨텍스트, 렌더링 명령을 GPU에 전달
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;	// 렌더 타겟 뷰, 렌더링 결과가 저장되는 곳
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
+
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
 #endif
+
 	float winRatio;
 	DWORD m_ClientWidth;
 	DWORD m_ClientHeight;
@@ -84,12 +89,8 @@ public:
 	DirectX::XMMATRIX GetProjection() const noexcept;
 
 	// Basic
-	void DrawTestTriangle();
+	void DrawTriangle();
 	void DrawIndexedTriangle();
-	void DrawConstantBuffer(float angle);
-	void DrawConstantBufferWithDXMath(float angle, float x, float y);
-
-	// 3D
-	void DrawCube(float angle, float x, float y);
-	void DrawCubeDepth(float angle, float x, float y); // using face color
+	void DrawConstTriangle(float angle);
+	void DrawDepthCube(float angle, float x, float y); // using face color
 };

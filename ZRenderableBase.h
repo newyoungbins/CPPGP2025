@@ -14,7 +14,7 @@ protected:
     }
     static void AddStaticBind(std::unique_ptr<Bind::ZBindable> bind) noxnd
     {
-        assert("Must use AddStaticIndexBuffer to bind index buffer" && typeid(bind) != typeid(Bind::ZIndexBuffer));
+        assert("*Must* use AddStaticIndexBuffer to bind index buffer" && typeid(*bind) != typeid(Bind::ZIndexBuffer));
         staticBinds.push_back(std::move(bind));
     }
     void AddStaticIndexBuffer(std::unique_ptr<Bind::ZIndexBuffer> ibuf) noxnd
@@ -28,7 +28,7 @@ protected:
         assert("Attempting to add index buffer a second time" && pIndexBuffer == nullptr);
         for (const auto& b : staticBinds)
         {
-            if (const auto p = dynamic_cast<Bind::ZIndexBuffer>(b.get()))
+            if (const auto p = dynamic_cast<Bind::ZIndexBuffer*>(b.get()))
             {
                 // 바인더 중에서 인덱스 버퍼 찾아서 포인터 재활용한다.
                 pIndexBuffer = p;

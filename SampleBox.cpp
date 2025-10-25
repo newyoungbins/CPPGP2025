@@ -99,12 +99,12 @@ SampleBox::SampleBox(ZGraphics& gfx,
         SetIndexFromStatic();
     }
 
-    AddBind(std::make_unique<Bind::ZTransformVSConstBuffer>(gfx, this));
+    AddBind(std::make_unique<Bind::ZTransformVSConstBuffer>(gfx, *this));
 }
 
 void SampleBox::Update(float dt) noexcept
 {
-    roll += droll dt;
+    roll += droll * dt;
     pitch += dpitch * dt;
     yaw += dyaw * dt;
     theta += dtheta * dt;
