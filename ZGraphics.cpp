@@ -4,6 +4,7 @@
 #include <d3dcompiler.h>
 #include <DirectXMath.h> // dx math
 
+
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib, "D3DCompiler.lib") // Shader Compiler
 
@@ -113,6 +114,21 @@ ZGraphics::ZGraphics(HWND hWnd, float winRatio, DWORD width, DWORD height)
 
     // bind depth stensil view to OM
     pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
+
+    // create alpha blend state
+    D3D11_BLEND_DESC blendDesc = {};
+    blendDesc.RenderTarget[0].BlendEnable = TRUE;
+    blendDesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    blendDesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    blendDesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    blendDesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    blendDesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    blendDesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    blendDesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+    GFX_THROW_INFO(pDevice->CreateBlendState(&blendDesc, &pBlendState));
+
+    pSpriteBatch = std::make_unique<dx::SpriteBatch>(pContext.Get());
+    pTexture = std::make_unique<Bind::ZTexture>(*this, L"dxlogo_256.bmp");
 }
 
 void ZGraphics::EndFrame()
@@ -771,6 +787,20 @@ void ZGraphics::DrawDepthCube(float angle, float x, float z)
     pContext->RSSetViewports(1u, &vp);
 
     GFX_THROW_INFO_ONLY(pContext->DrawIndexed((UINT)std::size(indices), 0u, 0u));
+}
+
+void ZGraphics::DrawTexture()
+{
+    // 알파 블렌드 상태 활성화
+    const float blendFactor[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+    pContext->OMSetBlendState(pBlendState.Get(), blendFactor, 0xffffffff);
+
+    pSpriteBatch->Begin();
+    pTexture->Blit(pSpriteBatch.get(), { 0, 0 });
+    pSpriteBatch->End();
+
+    //알파 블렌드 비활성화
+    pContext->OMSetBlendState(nullptr, blendFactor, 0xffffffff);
 }
 
 

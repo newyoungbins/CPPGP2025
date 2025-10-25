@@ -4,6 +4,8 @@
 #include "DxgiInfoManager.h"
 #include "ZConditionalNoExcept.h"
 #include "SampleBox.h"
+#include "SpriteBatch.h"
+#include "ZTexture.h"
 
 // D3D 11의 초기화 및 핵심 인터페이스 관리
 
@@ -19,6 +21,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;	// D3D11 장치 컨텍스트, 렌더링 명령을 GPU에 전달
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;	// 렌더 타겟 뷰, 렌더링 결과가 저장되는 곳
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
+	Microsoft::WRL::ComPtr<ID3D11BlendState> pBlendState;	// 알파 블렌드 상태
 
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
@@ -27,6 +30,9 @@ private:
 	float winRatio;
 	DWORD m_ClientWidth;
 	DWORD m_ClientHeight;
+
+	std::unique_ptr<DirectX::SpriteBatch> pSpriteBatch;
+	std::unique_ptr<Bind::ZTexture> pTexture;
 
 public:
 	class Exception : public ChiliException
@@ -93,4 +99,6 @@ public:
 	void DrawIndexedTriangle();
 	void DrawConstTriangle(float angle);
 	void DrawDepthCube(float angle, float x, float y); // using face color
+
+	void DrawTexture();
 };

@@ -136,6 +136,7 @@
     <ClCompile Include="ZMatrix.cpp" />
     <ClCompile Include="ZPixelShader.cpp" />
     <ClCompile Include="ZRenderable.cpp" />
+    <ClCompile Include="ZTexture.cpp" />
     <ClCompile Include="ZTopology.cpp" />
     <ClCompile Include="ZTransformVSConstBuffer.cpp" />
     <ClCompile Include="ZVector3.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="ZPixelShader.h" />
     <ClInclude Include="ZRenderable.h" />
     <ClInclude Include="ZRenderableBase.h" />
+    <ClInclude Include="ZTexture.h" />
     <ClInclude Include="ZTopology.h" />
     <ClInclude Include="ZTransformVSConstBuffer.h" />
     <ClInclude Include="ZVector3.h" />
@@ -186,6 +188,7 @@
     <None Include="DXGetErrorDescription.inl" />
     <None Include="DXGetErrorString.inl" />
     <None Include="DXTrace.inl" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PixelShader.hlsl">
@@ -235,5 +238,12 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\directxtk_desktop_win10.2025.7.10.1\build\native\directxtk_desktop_win10.targets" Condition="Exists('packages\directxtk_desktop_win10.2025.7.10.1\build\native\directxtk_desktop_win10.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\directxtk_desktop_win10.2025.7.10.1\build\native\directxtk_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\directxtk_desktop_win10.2025.7.10.1\build\native\directxtk_desktop_win10.targets'))" />
+  </Target>
 </Project>

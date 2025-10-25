@@ -33,11 +33,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     int y = (screenHeight - windowHeight) / 2;
 
     ZApp Game(_T("My D3D Test"), x, y, windowWidth, windowHeight, clientWidth, clientHeight);
-    BOOL result = Game.Run();
+    try
+    {
+        BOOL result = Game.Run();
+        FreeConsole();
+        return result;
+    }
+    catch (const ChiliException& e)
+    {
+        MessageBoxA(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
+    }
+    catch (const std::exception& e)
+    {
+        MessageBoxA(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
+    catch (...)
+    {
+        MessageBoxA(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
+    }
 
-    FreeConsole();
-
-    return result;
+    return -1;
 }
 
 ZApp::ZApp(const TCHAR* pszCaption,
@@ -156,6 +171,8 @@ BOOL ZApp::Frame()
         b->Update(dt);
         b->Render(*m_pGraphics);
     }
+
+    m_pGraphics->DrawTexture();
 
 
     // 렌더링된 후면 버퍼를 화면에 표시합니다.

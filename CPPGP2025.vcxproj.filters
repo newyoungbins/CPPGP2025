@@ -87,6 +87,9 @@
     <ClCompile Include="SampleBox.cpp">
       <Filter>Randerable</Filter>
     </ClCompile>
+    <ClCompile Include="ZTexture.cpp">
+      <Filter>Binderable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZVector3.h">
@@ -200,6 +203,9 @@
     <ClInclude Include="SampleBox.h">
       <Filter>Randerable</Filter>
     </ClInclude>
+    <ClInclude Include="ZTexture.h">
+      <Filter>Binderable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXGetErrorDescription.inl">
@@ -211,6 +217,7 @@
     <None Include="DXTrace.inl">
       <Filter>Exception</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
