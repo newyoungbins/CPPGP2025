@@ -1,4 +1,5 @@
 #include "GameGlobal.h"
+#include "Sheet.h"
 #include <mmsystem.h> // timeGetTime()
 #pragma comment(lib, "winmm.lib")
 
@@ -106,6 +107,11 @@ BOOL ZApp::Init()
             *m_pGraphics, rng, adist,
             ddist, odist, rdist
         ));
+
+        sheets.push_back(std::make_unique<Sheet>(
+            *m_pGraphics, rng, adist,
+            ddist, odist, rdist
+        ));
     }
     m_pGraphics->SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, (float)m_ClientHeight / (float)m_ClientWidth, 0.5f, 40.0f));
     m_lastTime = timeGetTime();
@@ -170,6 +176,12 @@ BOOL ZApp::Frame()
     {
         b->Update(dt);
         b->Render(*m_pGraphics);
+    }
+
+    for (auto& s : sheets)
+    {
+        s->Update(dt);
+        s->Render(*m_pGraphics);
     }
 
     m_pGraphics->DrawTexture();

@@ -7,6 +7,7 @@ class ZApp : public ZApplication
 private:
 	ZGraphics* m_pGraphics;
 	std::vector<std::unique_ptr<class SampleBox>> boxes;
+	std::vector<std::unique_ptr<class Sheet>> sheets;
 	DWORD m_lastTime = 0;
 
 public:
