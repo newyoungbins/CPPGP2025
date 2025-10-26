@@ -90,6 +90,12 @@
     <ClCompile Include="ZTexture.cpp">
       <Filter>Binderable</Filter>
     </ClCompile>
+    <ClCompile Include="Sheet.cpp">
+      <Filter>Randerable</Filter>
+    </ClCompile>
+    <ClCompile Include="ZSampler.cpp">
+      <Filter>Binderable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZVector3.h">
@@ -206,6 +212,21 @@
     <ClInclude Include="ZTexture.h">
       <Filter>Binderable</Filter>
     </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Randerable</Filter>
+    </ClInclude>
+    <ClInclude Include="ZMath.h">
+      <Filter>ZD3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="ZIndexedTriangleList.h">
+      <Filter>ZD3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheet.h">
+      <Filter>Randerable</Filter>
+    </ClInclude>
+    <ClInclude Include="ZSampler.h">
+      <Filter>Binderable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXGetErrorDescription.inl">
@@ -239,6 +260,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="VertexShaderCubeDepth.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="TextureVS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturePS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

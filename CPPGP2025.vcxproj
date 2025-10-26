@@ -128,6 +128,7 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="SampleBox.cpp" />
+    <ClCompile Include="Sheet.cpp" />
     <ClCompile Include="ZApplication.cpp" />
     <ClCompile Include="ZGraphicsResource.cpp" />
     <ClCompile Include="ZGraphics.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="ZMatrix.cpp" />
     <ClCompile Include="ZPixelShader.cpp" />
     <ClCompile Include="ZRenderable.cpp" />
+    <ClCompile Include="ZSampler.cpp" />
     <ClCompile Include="ZTexture.cpp" />
     <ClCompile Include="ZTopology.cpp" />
     <ClCompile Include="ZTransformVSConstBuffer.cpp" />
@@ -157,8 +159,10 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GraphicsThrowMacros.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="SampleBox.h" />
+    <ClInclude Include="Sheet.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="WindowsThrowMacros.h" />
     <ClInclude Include="ZApplication.h" />
@@ -170,11 +174,14 @@
     <ClInclude Include="ZD3D11.h" />
     <ClInclude Include="ZGraphics.h" />
     <ClInclude Include="ZIndexBuffer.h" />
+    <ClInclude Include="ZIndexedTriangleList.h" />
     <ClInclude Include="ZInputLayout.h" />
+    <ClInclude Include="ZMath.h" />
     <ClInclude Include="ZMatrix.h" />
     <ClInclude Include="ZPixelShader.h" />
     <ClInclude Include="ZRenderable.h" />
     <ClInclude Include="ZRenderableBase.h" />
+    <ClInclude Include="ZSampler.h" />
     <ClInclude Include="ZTexture.h" />
     <ClInclude Include="ZTopology.h" />
     <ClInclude Include="ZTransformVSConstBuffer.h" />
@@ -209,6 +216,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="TexturePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="TextureVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="VertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
