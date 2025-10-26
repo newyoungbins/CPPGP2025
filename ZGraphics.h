@@ -7,6 +7,8 @@
 #include "SpriteBatch.h"
 #include "ZTexture.h"
 
+
+
 // D3D 11의 초기화 및 핵심 인터페이스 관리
 
 class ZGraphics
@@ -21,7 +23,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;	// D3D11 장치 컨텍스트, 렌더링 명령을 GPU에 전달
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;	// 렌더 타겟 뷰, 렌더링 결과가 저장되는 곳
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
-	Microsoft::WRL::ComPtr<ID3D11BlendState> pBlendState;	// 알파 블렌드 상태
+	Microsoft::WRL::ComPtr<ID3D11BlendState> pBlendState;   // 알파 블렌드 상태
 
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;

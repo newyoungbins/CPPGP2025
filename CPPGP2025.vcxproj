@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicRenderState.cpp" />
     <ClCompile Include="ChiliException.cpp" />
     <ClCompile Include="dxerr.cpp" />
     <ClCompile Include="DxgiInfoManager.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="ZVertexShader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicRenderState.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliWin.h" />

@@ -1,7 +1,23 @@
 #include "GameGlobal.h"
 #include "Sheet.h"
+#include "GameState.h"
+#include "BasicRenderState.h."
 #include <mmsystem.h> // timeGetTime()
+
 #pragma comment(lib, "winmm.lib")
+
+GameState* g_currentState = nullptr;
+
+void ChangeState(GameState* newState, ZGraphics& gfx)
+{
+    if (g_currentState)
+    {
+        g_currentState->Exit();
+        SAFE_DELETE(g_currentState);
+    }
+    g_currentState = newState;
+    g_currentState->Enter(gfx);
+}
 
 void SetupConsole()
 {
@@ -92,9 +108,10 @@ BOOL ZApp::Shutdown()
 BOOL ZApp::Init()
 {
     m_pGraphics = new ZGraphics(GetHWnd(),
-        (float)m_ClientHeight / (float)m_ClientWidth
-        , m_ClientWidth, m_ClientHeight);
+        (float)m_ClientHeight / (float)m_ClientWidth, 
+        m_ClientWidth, m_ClientHeight);
 
+    ChangeState(new BasicRenderState(), *m_pGraphics);
 
     std::mt19937 rng(std::random_device{}());
     std::uniform_real_distribution<float> adist(0.0f, 3.1415f * 2.0f);
@@ -135,6 +152,18 @@ BOOL ZApp::Frame()
     m_pGraphics->ClearBuffer(c, c, 1.0f);
     m_pGraphics->SetViewport();
 
+
+    // delta time
+    DWORD currentTime = timeGetTime();
+    float dt = (currentTime - m_lastTime) / 10000.0f;
+    m_lastTime = currentTime;
+
+    if (g_currentState)
+    {
+        g_currentState->Update(dt);
+        g_currentState->Render(*m_pGraphics);
+    }
+
     //m_pGraphics->DrawTriangle();
     //m_pGraphics->DrawIndexedTriangle();
     //m_pGraphics->DrawConstTriangle((float)dValue);
@@ -168,21 +197,19 @@ BOOL ZApp::Frame()
 
 
 
-    DWORD currentTime = timeGetTime();
-    float dt = (currentTime - m_lastTime) / 1000.0f;
-    m_lastTime = currentTime;
 
-    for (auto& b : boxes)
-    {
-        b->Update(dt);
-        b->Render(*m_pGraphics);
-    }
 
-    for (auto& s : sheets)
-    {
-        s->Update(dt);
-        s->Render(*m_pGraphics);
-    }
+    //for (auto& b : boxes)
+    //{
+    //    b->Update(dt);
+    //    b->Render(*m_pGraphics);
+    //}
+
+    //for (auto& s : sheets)
+    //{
+    //    s->Update(dt);
+    //    s->Render(*m_pGraphics);
+    //}
 
     m_pGraphics->DrawTexture();
 

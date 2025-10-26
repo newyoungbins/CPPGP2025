@@ -28,6 +28,9 @@
     <Filter Include="Randerable">
       <UniqueIdentifier>{a6a676a0-012c-491c-8fc0-6b0becb41abe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="State">
+      <UniqueIdentifier>{c4e42bf9-c596-45c7-b827-9f08ac1781a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZVector3.cpp">
@@ -96,6 +99,9 @@
     <ClCompile Include="ZSampler.cpp">
       <Filter>Binderable</Filter>
     </ClCompile>
+    <ClCompile Include="BasicRenderState.cpp">
+      <Filter>State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZVector3.h">
@@ -105,9 +111,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CPPGP2025.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TitleState.h">
@@ -226,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="ZSampler.h">
       <Filter>Binderable</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicRenderState.h">
+      <Filter>State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
